@@ -45,6 +45,61 @@ namespace BusinessLayer
             }
             
         }
+
+        public void AddEmployee(Employee employee)
+        {
+            string connStr = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(connStr))
+            {
+                SqlCommand cmd = new SqlCommand("spAddAllEmployee", con) {CommandType = CommandType.StoredProcedure};
+
+                SqlParameter paramName = new SqlParameter {ParameterName = "@Name", Value = employee.Name};
+                cmd.Parameters.Add(paramName);
+
+                SqlParameter paramGender = new SqlParameter { ParameterName = "@Gender", Value = employee.Gender };
+                cmd.Parameters.Add(paramGender);
+
+                SqlParameter paramCity = new SqlParameter { ParameterName = "@City", Value = employee.City };
+                cmd.Parameters.Add(paramCity);
+
+                SqlParameter paramDepartmentId = new SqlParameter { ParameterName = "@DepartmentId", Value = employee.DepartmentId };
+                cmd.Parameters.Add(paramDepartmentId);
+
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+
+            
+        }
+
+        public void SaveEmployee(Employee employee)
+        {
+            string connStr = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(connStr))
+            {
+                SqlCommand cmd = new SqlCommand("spSaveEmployee", con) { CommandType = CommandType.StoredProcedure };
+
+                SqlParameter paramId = new SqlParameter { ParameterName = "@Id", Value = employee.EmployeeId};
+                cmd.Parameters.Add(paramId);
+
+                SqlParameter paramName = new SqlParameter { ParameterName = "@Name", Value = employee.Name };
+                cmd.Parameters.Add(paramName);
+
+                SqlParameter paramGender = new SqlParameter { ParameterName = "@Gender", Value = employee.Gender };
+                cmd.Parameters.Add(paramGender);
+
+                SqlParameter paramCity = new SqlParameter { ParameterName = "@City", Value = employee.City };
+                cmd.Parameters.Add(paramCity);
+
+                SqlParameter paramDepartmentId = new SqlParameter { ParameterName = "@DepartmentId", Value = employee.DepartmentId };
+                cmd.Parameters.Add(paramDepartmentId);
+
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
     }
 }
         

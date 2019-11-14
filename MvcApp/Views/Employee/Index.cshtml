@@ -1,5 +1,5 @@
-﻿@using MvcApp.Models
-@model IEnumerable<Employee>
+﻿
+@model IEnumerable<BusinessLayer.Employee>
 
 @{
     ViewBag.Title = "Employee List";
@@ -10,7 +10,7 @@
 <div>
     <h2>Employee List</h2>
     <ul>
-        @foreach(Employee employee in @Model)
+        @foreach(BusinessLayer.Employee employee in @Model)
         {
             <li>
                 @Html.ActionLink(employee.Name,"Details",new {id = employee.EmployeeId} )
